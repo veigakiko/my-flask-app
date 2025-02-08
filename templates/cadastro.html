@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cadastro - Boituva Beach Club</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background: #f8f9fa;
+      }
+      .card {
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card p-4">
+            <h2 class="mb-4">Cadastro de Usuário</h2>
+            <form method="POST">
+              <div class="form-group">
+                <label for="nome">Nome</label>
+                <input
+                  type="text"
+                  id="nome"
+                  name="nome"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email">E-mail</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input
+                  type="tel"
+                  id="telefone"
+                  name="telefone"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="senha">Senha</label>
+                <input
+                  type="password"
+                  id="senha"
+                  name="senha"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="confirm_senha">Confirmar Senha</label>
+                <input
+                  type="password"
+                  id="confirm_senha"
+                  name="confirm_senha"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+              <a
+                href="{{ url_for('login') }}"
+                class="btn btn-secondary mt-3"
+              >
+                Voltar
+              </a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"
+    ></script>
+  </body>
+</html>

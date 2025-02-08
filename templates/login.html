@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Login - Boituva Beach Club</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    
+    <style>
+      /* General Reset */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(120deg, #f7f7f7, #e3e3e3);
+      }
+
+      /* Centered Login Form */
+      .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+
+      /* Login Box */
+      .login-box {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      /* Logo */
+      .login-logo {
+        width: 180px;
+        height: auto;
+        margin-bottom: 20px;
+      }
+
+      /* Form Styling */
+      .form-control {
+        border-radius: 5px;
+        padding: 12px;
+        font-size: 16px;
+      }
+
+      /* Buttons */
+      .btn-custom {
+        border-radius: 5px;
+        padding: 12px;
+        font-size: 16px;
+      }
+
+      /* Footer */
+      .footer-text {
+        font-size: 0.9rem;
+        color: #888;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="login-container">
+      <div class="login-box">
+        <!-- Logo -->
+        <img
+        
+        />
+
+        <h3 class="mb-3">keep the beach vibes flowing!🎾</h3>
+
+        <!-- Login Form -->
+        <form method="POST">
+          <div class="form-group">
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              placeholder="Usuário"
+              required
+              autofocus
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              placeholder="Senha"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-custom">
+            Entrar
+          </button>
+
+          <a href="{{ url_for('cadastro') }}" class="btn btn-secondary btn-block btn-custom mt-2">
+            Cadastrar
+          </a>
+        </form>
+
+        <!-- Footer -->
+        <p class="footer-text mt-4">&copy; 2025 Boituva Beach Club</p>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

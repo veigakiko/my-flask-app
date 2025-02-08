@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cash - Boituva Beach Club</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <style>
+      /* Remove default margin and padding */
+      html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 100%;
+      }
+
+      /* Navbar Styling */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+        margin: 0 !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Adjust Content Wrapper to avoid Navbar overlap */
+      .content-wrapper {
+        margin-top: 56px;
+      }
+
+      /* Sidebar Styling */
+      .sidebar {
+        position: fixed;
+        top: 56px;
+        bottom: 0;
+        left: 0;
+        width: 240px;
+        background: linear-gradient(180deg, #343a40, #3d4146);
+        color: #fff;
+        overflow-y: auto;
+        padding-top: 1rem;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .sidebar .nav-link {
+        color: #fff;
+        padding: 0.75rem 1rem;
+        transition: background-color 0.2s ease;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: rgba(255,255,255,0.1);
+      }
+
+      .sidebar .active {
+        background-color: #495057;
+      }
+
+      /* Main Content */
+      .main-content {
+        margin-left: 240px;
+        padding: 1.5rem;
+      }
+
+      /* Table Styling */
+      .table-container {
+        margin-top: 20px;
+        overflow-x: auto;
+      }
+
+      .table {
+        font-size: 0.9rem; /* Smaller font for readability */
+        border-collapse: collapse;
+      }
+
+      .table th, .table td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #dee2e6;
+      }
+
+      .table thead {
+        background-color: #343a40;
+        color: white;
+      }
+
+      .table tbody tr:nth-child(odd) {
+        background-color: #f8f9fa;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('home') }}">
+          <i class="bi bi-bezier2 mr-2"></i> Boituva Beach Club
+        </a>
+      </div>
+    </nav>
+
+    <!-- CONTENT WRAPPER -->
+    <div class="content-wrapper">
+      <!-- SIDEBAR -->
+      <nav class="sidebar d-none d-md-block">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a href="{{ url_for('home') }}" class="nav-link">
+              <i class="bi bi-house-door-fill mr-2"></i> Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url_for('clients') }}" class="nav-link">
+              <i class="bi bi-people mr-2"></i> Clients
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url_for('cash') }}" class="nav-link active">
+              <i class="bi bi-cash-stack mr-2"></i> Cash
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url_for('analytics') }}" class="nav-link">
+              <i class="bi bi-graph-up-arrow mr-2"></i> Analytics
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url_for('events') }}" class="nav-link">
+              <i class="bi bi-calendar-event mr-2"></i> Events
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url_for('settings') }}" class="nav-link">
+              <i class="bi bi-gear mr-2"></i> Settings
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <div class="container-fluid">
+          <h1 class="mb-4">Controle de Pedidos</h1>
+
+          <!-- Flash Messages -->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+
+          <!-- Form -->
+          <form method="POST">
+            <div class="row">
+              <div class="col-md-4">
+                <label for="client-select">Cliente:</label>
+                <select class="form-control" name="client" required>
+                  {% for client in clients %}
+                  <option value="{{ client }}">{{ client }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <div class="col-md-4">
+                <label for="product-select">Produto:</label>
+                <select class="form-control" name="product" required>
+                  {% for product in products %}
+                  <option value="{{ product }}">{{ product }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <div class="col-md-4">
+                <label for="quantity">Quantidade:</label>
+                <input type="number" class="form-control" name="quantity" min="1" value="1" required />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-success mt-3">Registrar Pedido</button>
+          </form>
+
+          <!-- Last 10 Orders Table -->
+          <div class="table-container">
+            <h2 class="mt-4">Últimos 10 Pedidos</h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Cliente</th>
+                  <th>Produto</th>
+                  <th>Quantidade</th>
+                  <th>Data</th>
+                  <th>Status</th>
+                  <th>ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in last_orders %}
+                <tr>
+                  <td>{{ order[0] }}</td>
+                  <td>{{ order[1] }}</td>
+                  <td>{{ order[2] }}</td>
+                  <td>{{ order[3] }}</td>
+                  <td>{{ order[4] }}</td>
+                  <td>{{ order[5] }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
